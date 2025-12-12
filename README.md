@@ -12,15 +12,17 @@
 
 ### ✨ Tính Năng
 
-- 🎮 Giao diện đồ họa trực quan với Pygame
+- 🎮 Giao diện đồ họa hiện đại với Pygame
 - 🤖 AI thông minh sử dụng thuật toán Negamax + Alpha-Beta Pruning
+- 🎯 **4 cấp độ AI:** Easy, Medium, Hard, Very Hard
+- 🎨 **5 themes màu sắc:** Chess.com, Cờ Vua VN, Wood, Ocean, Purple
+- 🔊 **Âm thanh** di chuyển và ăn quân thực tế
 - ♟️ Hỗ trợ đầy đủ luật cờ vua:
   - Nhập thành (Castling)
   - Bắt tốt qua đường (En Passant)
   - Phong cấp tốt (Pawn Promotion)
   - Phát hiện Chiếu/Chiếu hết/Hòa
-- 🔄 Undo nước đi (phím Z)
-- 🔁 Reset game (phím R)
+- 📜 Menu chọn độ khó khi bắt đầu
 - 📝 Hiển thị lịch sử nước đi
 - ✨ Animation di chuyển quân mượt mà
 - 💡 Highlight gợi ý nước đi hợp lệ
@@ -74,6 +76,10 @@ python ChessMain.py
 | **Chuột trái** | Chọn quân cờ và di chuyển |
 | **Phím Z** | Undo - Hoàn tác nước đi |
 | **Phím R** | Reset - Chơi lại từ đầu |
+| **Phím T** | Đổi Theme màu sắc |
+| **Phím D** | Đổi Độ khó AI |
+| **Phím 1** | Chơi lại (khi kết thúc) |
+| **Phím 2** | Về menu chọn độ khó (khi kết thúc) |
 
 ### Chế Độ Chơi
 
@@ -97,13 +103,13 @@ player_two = False  # True = Người chơi, False = AI
 
 ```
 chess/
-├── ChessMain.py      # Giao diện đồ họa & vòng lặp game chính
-├── ChessEngine.py    # Logic cờ vua & quản lý trạng thái
-├── ChessAI.py        # Thuật toán AI (Negamax + Alpha-Beta)
-├── images/           # Hình ảnh quân cờ
-│   ├── wK.png, wQ.png, wR.png, wB.png, wN.png, wp.png
-│   └── bK.png, bQ.png, bR.png, bB.png, bN.png, bp.png
-└── README.md         # Hướng dẫn sử dụng
+├── ChessMain.py          # Giao diện đồ họa & vòng lặp game
+├── ChessEngine.py        # Logic cờ vua & quản lý trạng thái
+├── ChessAI.py            # Thuật toán AI (Negamax + Alpha-Beta)
+├── generate_sounds.py    # Script tải âm thanh từ Lichess
+├── images/               # Hình ảnh quân cờ
+├── sounds/               # File âm thanh (mp3)
+└── README.md             # Hướng dẫn sử dụng
 ```
 
 ---
@@ -114,7 +120,13 @@ chess/
 
 AI sử dụng thuật toán **Negamax** (biến thể của Minimax) kết hợp **cắt tỉa Alpha-Beta** để tối ưu hóa việc tìm kiếm.
 
-**Độ sâu tìm kiếm:** 3 nước (có thể điều chỉnh trong `ChessAI.py`)
+**Độ sâu tìm kiếm theo cấp độ:**
+| Cấp độ | Depth | Thời gian suy nghĩ |
+|--------|-------|-------------------|
+| Easy | 1 | Ngay lập tức |
+| Medium | 2 | ~1 giây |
+| Hard | 3 | Vài giây |
+| Very Hard | 4 | 10-30 giây |
 
 ### Hàm Đánh Giá (Evaluation Function)
 
